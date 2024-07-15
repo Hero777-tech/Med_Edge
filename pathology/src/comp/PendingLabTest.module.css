@@ -1,0 +1,29 @@
+/* PendingLabTest.module.css */
+.contain {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 74vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  overflow-y: auto;
+  max-height: 60vh;
+  margin-top: 10px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+

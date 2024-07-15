@@ -1,0 +1,33 @@
+.main {
+  height: max-content;
+ 
+ 
+  width: 49%;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid rgb(161, 153, 153);
+  padding: 2%;
+}
+
+.task {
+  background-color: white;
+  height: max-content;
+  text-align: center;
+  padding: 3vh;
+  border-radius: 1%;
+  border: 1px solid rgb(146, 136, 136);
+  width: 47%;
+  border-radius: 10px;
+}
+.butt{
+  width: max-content;
+}
+
+.newtask {
+  margin-bottom: 2%;
+}
+.contain{
+  display: flex;
+  gap: 2%;
+  min-height: 74vh;
+}

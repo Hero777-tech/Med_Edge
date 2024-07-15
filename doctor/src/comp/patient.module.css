@@ -1,0 +1,57 @@
+.contain{
+  display: flex;
+  gap: 2%;
+}
+.leftBox {
+  
+  background-color: white;
+  /* Light gray background */
+  border: 1px solid #ddd;
+  
+  border-radius: 10px;
+  /* Rounded corners */
+
+  /* Padding and Margin */
+  padding: 20px;
+  /* Space between content and border */
+  margin: 10px;
+  /* Space around the box */
+
+  /* Width and Height */
+  width: 40%;
+  /* Adjust as needed */
+  height: fit-content;
+  /* Minimum height for content */
+
+  /* Responsiveness (Optional) */
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    /* Adjust width for smaller screens */
+  }
+}
+.rightBox{
+  background-color: white;
+    padding: 4%;
+    border-radius: 2%;
+    width: 56%;
+    min-height: 74vh;
+  
+}
+.patientList:hover{
+  border:0.01px solid rgb(223, 212, 212);
+  cursor: pointer;
+}
+.displ{
+  line-height: 2;
+}
+.set{
+  display: flex;
+  justify-content:flex-start;
+  padding: 5%;
+  padding-top: 0;
+}
+.set input{
+  width: 100%;
+  background-color: rgb(242, 242, 240);
+  height: 6vh;
+}
