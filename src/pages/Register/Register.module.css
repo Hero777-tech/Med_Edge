@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.register {
+  height: 100vh;
+  background: #CECECE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 0; */
+}
+
+.card {
+  width: 92%;
+  max-width: 1000px;
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
+  min-height: 550px;
+  overflow: hidden;
+  flex-direction: row;
+}
+
+.selector #selector1,
+.selector #selector2 {
+  width: 50%;
+}
+
+.date label {
+  width: 30%;
+}
+
+.date input {
+  width: 50%;
+}
+
+.left {
+  flex: 2;
+  padding: 50px;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+.left h1 {
+  color: #c069a7;
+}
+
+.left form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.left form input,
+select {
+  border: none;
+  border-bottom: 1px solid lightgray;
+  padding: 10px 10px;
+}
+
+.left form input:focus,
+.left form select:focus {
+  outline: none;
+}
+
+.left form button {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  background-color: #843E71;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.Gender,
+.phone,
+#date {
+  width: 50%;
+}
+
+.left .name,
+.left .numbers,
+.left .selector,
+.left .pass,
+.left .date {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.left .date label {
+  border-bottom: 1px solid lightgray;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.left .name input,
+.left .pass input {
+  width: 50%;
+}
+
+.right {
+  flex: 1;
+  background: linear-gradient(#53364bba, #5d35522c), url("https://images.pexels.com/photos/4167542/pexels-photo-4167542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  color: white;
+  justify-content: center;
+  position: relative;
+  padding: 30px;
+  /* width: 25%; */
+}
+
+.right h1 {
+  font-size: 50px;
+}
+
+.countryCode{
+  flex-grow: 0.6;
+}
+.phone{
+  flex-grow: 1.3;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loginbtn{
+  border:none;
+  height: 2rem;
+  width:5rem;
+  border-radius: 15px;
+  color: white;
+  background-color: #843E71;
+
+}
+.loginbtn:hover{
+  cursor: pointer;
+}
+.img, .img p{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

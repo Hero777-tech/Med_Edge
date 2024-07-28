@@ -1,0 +1,21 @@
+/* .card{
+  height: 27vh;
+  width: 19vw;
+  border: 1.5px solid brown;
+  border-radius:7px;
+  text-align: center;
+  background-color: rgb(104, 191, 225);
+  color: white;
+  margin: 4%;
+  margin-left: 0%;
+  margin-top: 0;
+} */
+.contain{
+ background-color: white;
+ padding: 5%;
+ height:74vh;
+ border-radius: 10px;
+}
+.details{
+  margin-top: 3%;
+}

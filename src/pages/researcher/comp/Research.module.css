@@ -1,0 +1,83 @@
+.request {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.incoming,
+.outgoing {
+  background-color: #f8f7f7;
+  border-radius: 1rem;
+  padding: 15px;
+  flex: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.incoming {
+  background-color: #e6f7ff;
+}
+
+.outgoing {
+  background-color: #fff0f0;
+}
+
+.req {
+  background-color: #dbd7d7;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status {
+  display: flex;
+  gap: 10px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+h5,
+h6,
+p {
+  margin: 5px 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+button span {
+  margin-left: 5px;
+}
+
+.detailOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure it's above other content */
+}
+
+.detailBox {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1100;
+  /* Ensure it's above the overlay */
+}
+
+.blurred {
+  filter: blur(5px);
+  pointer-events: none;
+  z-index: 900;
+  /* Ensure it's below the detailBox */
+}

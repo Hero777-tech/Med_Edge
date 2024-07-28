@@ -1,0 +1,37 @@
+.main {
+  height: 100vh;
+  width: 67vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.box {
+  padding: 6px;
+  width: 18vw;
+  height: 40vh;
+  background-color: white;
+  border-radius: 5%;
+  margin: 18px;
+  font-size: large;
+  text-align: center;
+  font-style: italic;
+}
+
+.box:hover {
+  border: 2px solid black;
+}
+
+input {
+  width: 10vw;
+}
+
+button {
+  width: 5vw;
+  border: 2px;
+  background-color: rgb(154, 154, 242);
+}
+
+li {
+  text-align: start;
+}

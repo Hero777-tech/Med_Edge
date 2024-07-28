@@ -1,0 +1,97 @@
+.contain {
+  display: flex;
+  gap: 2%;
+  min-height: 74vh;
+  padding: 0;
+  margin: 0;
+}
+.givenPrescription{
+  display: flex;
+    gap: 2%;
+    min-height: 74vh;
+    width:60%;
+    
+}
+
+.leftBox {
+
+  background-color: white;
+  /* Light gray background */
+  border: 1px solid #ddd;
+
+  border-radius: 10px;
+  /* Rounded corners */
+  width: 47%;
+
+  /* Padding and Margin */
+  padding: 20px;
+  
+  height: fit-content;
+  /* Minimum height for content */
+
+  /* Responsiveness (Optional) */
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    /* Adjust width for smaller screens */
+  }
+}
+
+.middleBox {
+  background-color: white;
+  padding: 4%;
+  border-radius: 2%;
+  width: 50%;
+  height:max-content;
+  border: 1px solid #ddd;
+
+}
+
+.patientList:hover {
+  border: 0.01px solid rgb(223, 212, 212);
+  cursor: pointer;
+}
+
+.displ {
+  line-height: 2;
+}
+
+.set {
+  display: flex;
+  justify-content: flex-start;
+  padding: 5%;
+  padding-top: 0;
+}
+
+.set input {
+  width: 100%;
+  background-color: rgb(242, 242, 240);
+  height: 6vh;
+}
+.rightBox{
+  background-color: white;
+  line-height: 20px;
+  padding: 2%;
+  height: max-content;
+  border-radius: 10px;
+  width: 40%;
+  border: 1px solid #ddd;
+}
+@media(max-width:1000px){
+  .contain{
+    display: flex;
+    flex-direction: column;
+  }
+  .givenPrescription{
+    width: 100%;
+    margin-bottom: 2%;
+  }
+  .middleBox{
+    width: 50%;
+  }
+  .leftBox{
+    width: 50%;
+  }
+  .rightBox{
+    width: 100%;
+  }
+}
