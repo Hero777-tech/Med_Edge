@@ -1,0 +1,10 @@
+.btn{
+  width: fit-content;
+}
+button{
+  width: fit-content;
+}
+.active{
+  background-color: rgb(65, 75, 215);
+  color: white;
+}

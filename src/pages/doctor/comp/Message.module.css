@@ -1,0 +1,48 @@
+.box {
+  width: 100%;
+  background-color: white;
+  padding: 5%;
+
+  /* Add some space between boxes */
+}
+
+.up {
+  display: flex;
+  width: 100%;
+}
+
+.readMessages {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  /* Make it take up half of the space */
+  margin-right: 2%;
+  /* Add some space between the two columns */
+}
+
+.upon {
+  width: 50%;
+  /* Make it take up half of the space */
+}
+
+.composeMessage {
+  background-color: white;
+  padding: 2%;
+  margin: 2% 0;
+  width: 100%;
+}
+
+.sendMessage {
+  margin: 2%;
+  margin-bottom: 0%;
+}
+
+.message,
+.messageSubject {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: blue;
+  color: white;
+}

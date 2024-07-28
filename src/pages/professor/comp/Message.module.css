@@ -1,0 +1,25 @@
+.box{
+  width: 50%;
+  background-color: white;
+  padding: 2%;
+  height: auto;
+  border-radius: 10px;
+
+}
+.readMessages{
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+    margin: 2%;
+    width: 96%;
+}
+.composeMessage{
+  background-color: white;
+  padding: 2%;
+  margin: 2%;
+  width: 96%;
+}
+.sendMessage{
+  margin: 2%;
+  margin-bottom: 0%;
+}

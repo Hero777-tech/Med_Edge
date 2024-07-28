@@ -1,0 +1,217 @@
+/* No changes needed to the provided CSS */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.home {
+  min-height: 100vh;
+  background: #CECECE;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  overflow: hidden;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.card {
+  width: 94%;
+  background-color: white;
+  height: max-content;
+  border-radius: 10px;
+  border-top-right-radius: 10px;
+  /* overflow: hidden; */
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding-bottom: 2%;
+}
+
+.left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding-left: 45px;
+  padding-top: 30px;
+  width: 50%;
+}
+
+.left .Mededge {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.left .Mededge h1 {
+  font-size: 60px;
+  font-weight: bold;
+  color: #b00b84;
+}
+
+.left .Mededge h2 {
+  font-size: 28px;
+}
+
+.left .Mededge p {
+  padding-top: 4%;
+  line-height: 26px;
+  font-size: 20px;
+}
+
+.left .community {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.left .community p {
+  line-height: 26px;
+  font-size: 20px;
+}
+
+.left .community h3 {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.right {
+  /* flex: 1; */
+  align-items: center;
+  justify-content: center;
+  padding-right: 20px;
+  padding-top: 80px;
+  width: 40%;
+  
+}
+
+.rightimg { 
+  width: 100%;
+  height: 100%;
+  background: url("../../assets/pic.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* z-index: 10; */
+}
+
+.left .buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+ /* width: max-content; */
+}
+
+.left .button {
+  background-color: #b00b84;
+  padding: 1%;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  /* height: 20px; */
+  width: max-content;
+  font-size: 1.2rem;
+
+}
+
+.button:hover {
+  cursor: pointer;
+  ;
+}
+
+/* No changes needed to the provided CSS */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+
+  /* Adjust styles for smaller screens */
+  .home {
+    justify-content: flex-start;
+    /* Content at top on smaller screens */
+  }
+
+  .card {
+    width: 100%;
+    /* Full width on smaller screens */
+    border-radius: 0;
+    /* Remove rounded corners on smaller screens */
+  }
+
+  .left {
+    flex: 1;
+    /* Adjust flex sizing for smaller screens */
+    padding-left: 20px;
+    /* Adjust padding on smaller screens */
+    padding-top: 15px;
+    /* Adjust padding on smaller screens */
+  }
+
+  .left .Mededge h1 {
+    font-size: 40px;
+    /* Adjust heading size on smaller screens */
+  }
+
+  .left .Mededge p {
+    font-size: 18px;
+    /* Adjust paragraph size on smaller screens */
+    line-height: 24px;
+    /* Adjust line height on smaller screens */
+  }
+
+  .left .community p {
+    font-size: 18px;
+    /* Adjust paragraph size on smaller screens */
+    line-height: 24px;
+    /* Adjust line height on smaller screens */
+  }
+
+  .left .community h3 {
+    font-size: 20px;
+    /* Adjust heading size on smaller screens */
+  }
+
+  .right {
+    flex: 1;
+    /* Adjust flex sizing for smaller screens */
+    padding-right: 10px;
+    /* Adjust padding on smaller screens */
+    padding-top: 20px;
+    /* Adjust padding on smaller screens */
+  }
+
+  .rightimg {
+    width: 100%;
+    /* Full width image on smaller screens */
+    height: auto;
+    background: url("../../assets/pic.png");
+    /* Adjust image height based on content */
+  }
+
+  .left .buttons {
+    width: 100%;
+    /* Full width buttons on smaller screens */
+    justify-content: space-around;
+    /* Align buttons horizontally */
+  }
+
+  .left .button {
+    width: 45%;
+    /* Adjust button width on smaller screens */
+  }
+}

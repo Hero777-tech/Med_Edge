@@ -1,0 +1,71 @@
+.collaborators{
+  
+  border-radius: 10px;
+}
+.collablink{
+  color: rgb(28, 94, 137);
+}
+#submitbtn{
+  background-color: rgb(28, 94, 137);
+  width: 200px;
+}
+.container{
+  display: flex;
+  justify-content: space-around;
+}
+.collabrequest{
+  
+  padding: 10px;
+  background-color: white;
+  border-radius: 14px;
+}
+.collab{
+  
+  background-color: white;
+  padding: 10px;
+  border-radius: 14px;
+  
+}
+.collab h2{
+  text-align: center;
+}
+.field{
+  width: 100%;
+  min-height: 2rem;
+  
+}
+.form-control{
+  margin-bottom: 100px;
+}
+.form-check{
+  margin-top: 200px;
+}
+.checkboxes{
+  margin-top: 20px;
+}
+.collab button{
+  
+  background-color: rgb(228, 111, 27);
+  border: none;
+  min-width: 10vh;
+  display: flex;
+  flex-direction: column;
+}
+.collabrequest li{
+  margin-top: 20px;
+}
+.collabrequest button{
+  margin: 4px;
+  padding: 4px;
+  border: none;
+  min-width: 10vh;
+  display: flex;
+  flex-direction: column;
+  
+}
+.btnn{
+  width: 80px;
+  align-items: center;
+  padding: 20px;
+  max-height: fit-content;
+}
