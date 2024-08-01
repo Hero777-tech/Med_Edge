@@ -1,12 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Login.module.css"; // Importing CSS module
+import axios from "axios";
+import styles from "./Login.module.css";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const goToRegister = () => {
     navigate("/register");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password,
+      });
+      
+      // Store the token in localStorage
+      localStorage.setItem("token", response.data.token);
+      
+      // Check for user type in the response
+      const userType = response.data.userType;
+      
+      if (userType) {
+        // Navigate based on user type
+        switch(userType.toLowerCase()) {
+          case 'doctor':
+            navigate("/doctor");
+            break;
+          case 'patient':
+            navigate("/patient");
+            break;
+          case 'pathologist':
+            navigate("/pathology");
+            break;
+          case 'researcher':
+            navigate("/researcher");
+            break;
+          case 'professor':
+            navigate("/professor");
+            break;
+          default:
+            // If no matching route, navigate to a default page
+            navigate("/");
+            break;
+        }
+      } else {
+        // If userType is not provided, navigate to a default page
+        console.log("User type not provided in the response. Navigating to default page.");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError(error.response?.data?.message || "An error occurred during login");
+    }
   };
 
   return (
@@ -14,14 +67,24 @@ export default function Login() {
       <div className={styles.card}>
         <div className={styles.left}>
           <h1>Login</h1>
-          <form action="" method="post">
-            <input type="email" placeholder="Email" name="email" required />
+          {error && <p className={styles.error}>{error}</p>}
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <div className={styles.pass}>
               <input
                 type="password"
                 placeholder="Password"
                 name="password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button type="submit">Login</button>

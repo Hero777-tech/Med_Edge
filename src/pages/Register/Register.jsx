@@ -1,12 +1,60 @@
-import React, { useEffect } from "react";
-import styles from "./Register.module.css"; // Importing CSS module
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import styles from "./Register.module.css";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    gender: "",
+    countryCode: "+91",
+    phoneNumber: "",
+    dateOfBirth: "",
+    facilityType: "",
+    facilitySubType: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
 
   const goToLogin = () => {
     navigate("/login");
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/register", {
+        username: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        password: formData.password,
+        gender: formData.gender,
+        phoneNumber: `${formData.countryCode}${formData.phoneNumber}`,
+        dateOfBirth: formData.dateOfBirth,
+        facilityType: formData.facilityType,
+        facilitySubType: formData.facilitySubType,
+      });
+
+      console.log(response.data);
+      // Redirect to login page after successful registration
+      navigate("/login");
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred during registration");
+    }
   };
 
   useEffect(() => {
@@ -15,6 +63,7 @@ export default function Register() {
 
     selector1.addEventListener("change", function () {
       const selectedType = this.value;
+      setFormData({ ...formData, facilityType: selectedType, facilitySubType: "" });
 
       selector2.innerHTML = "";
 
@@ -58,9 +107,7 @@ export default function Register() {
         const countryCodes = data.map((country) => {
           return {
             name: country.name.common,
-            code:
-              country.idd.root +
-              (country.idd.suffixes ? country.idd.suffixes[0] : ""),
+            code: country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : ""),
           };
         });
 
@@ -83,28 +130,44 @@ export default function Register() {
       <div className={styles.card}>
         <div className={styles.left}>
           <h1>Register</h1>
-          <form action="" method="post">
+          {error && <p className={styles.error}>{error}</p>}
+          <form onSubmit={handleSubmit}>
             <div className={styles.name}>
               <input
                 type="text"
                 placeholder="First Name"
-                name="first-name"
+                name="firstName"
                 required
+                value={formData.firstName}
+                onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="Last Name"
-                name="last-name"
+                name="lastName"
                 required
+                value={formData.lastName}
+                onChange={handleChange}
               />
             </div>
 
-            <input type="email" placeholder="Email" name="email" required />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+            />
 
-            <select name="Gender" className={styles.Gender}>
-              <option value="gender" selected disabled required>
-                Select gender
-              </option>
+            <select
+              name="gender"
+              className={styles.Gender}
+              value={formData.gender}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>Select gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
@@ -114,10 +177,11 @@ export default function Register() {
                 className={styles.countryCode}
                 id="countryCode"
                 name="countryCode"
-                value="+91"
+                value={formData.countryCode}
+                onChange={handleChange}
                 required
               >
-                <option value="+91(India)">+91(India)</option>
+                <option value="+91">+91(India)</option>
               </select>
               <input
                 type="tel"
@@ -125,6 +189,8 @@ export default function Register() {
                 className={styles.phone}
                 required
                 placeholder="Enter your mobile number"
+                value={formData.phoneNumber}
+                onChange={handleChange}
               />
             </div>
 
@@ -132,26 +198,34 @@ export default function Register() {
               <label>Date of Birth</label>
               <input
                 type="date"
-                placeholder="Date of Birth"
-                name="dob"
-                value="date-of-birth"
-                id="date"
+                name="dateOfBirth"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
+                required
               />
             </div>
 
             <div className={styles.selector} required>
-              <select id="selector1">
-                <option value="none" selected disabled>
-                  Facility Type
-                </option>
+              <select
+                id="selector1"
+                name="facilityType"
+                value={formData.facilityType}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>Facility Type</option>
                 <option value="hospital">Hospital</option>
                 <option value="college">College</option>
               </select>
 
-              <select id="selector2" required>
-                <option value="none" selected disabled>
-                  Please Select a Facility Type
-                </option>
+              <select
+                id="selector2"
+                name="facilitySubType"
+                value={formData.facilitySubType}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>Please Select a Facility Type</option>
               </select>
             </div>
 
@@ -161,16 +235,20 @@ export default function Register() {
                 placeholder="Password"
                 name="password"
                 required
+                value={formData.password}
+                onChange={handleChange}
               />
               <input
                 type="password"
                 placeholder="Confirm Password"
-                name="Cpassword"
+                name="confirmPassword"
                 required
+                value={formData.confirmPassword}
+                onChange={handleChange}
               />
             </div>
 
-            <button>Register</button>
+            <button type="submit">Register</button>
           </form>
         </div>
         <div className={styles.right}>
