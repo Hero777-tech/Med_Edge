@@ -2,68 +2,46 @@ import style from "./Completedtest.module.css";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 function PendingLabTests() {
-  // Helper function to generate random names and dates
-  const randomName = () => {
-    const names = [
-      "John Doe",
-      "John Kade",
-      "John Daisy",
-      "Jane Doe",
-      "Jane Kade",
-    ];
-    return names[Math.floor(Math.random() * names.length)];
-  };
-
-  const randomDate = () => {
-    const month = "June";
-    const day = Math.floor(Math.random() * 30) + 1;
-    return `${month} ${day}, 2024`;
-  };
-
-  const randomDoctor = () => {
-    const doctors = ["Dr.Lee", "Dr.Yaskin", "Dr.Smith"];
-    return doctors[Math.floor(Math.random() * doctors.length)];
-  };
-
-  // Generate 50 random data entries
-  const generateData = () => {
-    let data = [];
-    for (let i = 0; i < 50; i++) {
-      data.push({
-        id: 2130 + i,
-        patientName: randomName(),
-        testType: "CBC",
-        dueDate: randomDate(),
-        referby: randomDoctor(),
-        isUploaded: false,
-      });
-    }
-    return data;
-  };
-
-  const [data, setData] = useState(generateData());
+  const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState([]);
+
+  const fetchData = async () => {
+    const result = await axios.get('http://localhost:5000/api/tests');
+    setData(result.data);
+    setFilteredData(result.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const setDisplayData = (event) => {
     setSearchText(event.target.value.toLowerCase());
     const filtered = data.filter((item) => {
-      const lowerId = item.id.toString().toLowerCase();
+      const lowerId = item.patientId.toString().toLowerCase();
       return lowerId.includes(event.target.value.toLowerCase());
     });
     setFilteredData(filtered);
   };
 
-  useEffect(() => {
-    setFilteredData(data);
-  }, [data]);
+  const handleFileUpload = async (id) => {
+    const fileInput = document.getElementById(`file-input-${id}`);
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
 
-  const handleFileUpload = (id) => {
+    await axios.post(`http://localhost:5000/api/upload/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
     setData((prevData) =>
       prevData.map((item) =>
-        item.id === id ? { ...item, isUploaded: true } : item
+        item.patientId === id ? { ...item, isUploaded: true } : item
       )
     );
   };
@@ -100,20 +78,20 @@ function PendingLabTests() {
           </thead>
           <tbody>
             {displayedData.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
+              <tr key={item.patientId}>
+                <td>{item.patientId}</td>
                 <td>{item.patientName}</td>
                 <td>{item.testType}</td>
                 <td>{item.dueDate}</td>
-                <td>{item.referby}</td>
+                <td>{item.referBy}</td>
                 <td>
                   <input
                     type="file"
                     style={{ display: "none" }}
-                    id={`file-input-${item.id}`}
-                    onChange={() => handleFileUpload(item.id)}
+                    id={`file-input-${item.patientId}`}
+                    onChange={() => handleFileUpload(item.patientId)}
                   />
-                  <label htmlFor={`file-input-${item.id}`}>
+                  <label htmlFor={`file-input-${item.patientId}`}>
                     <Button
                       variant={item.isUploaded ? "danger" : "primary"}
                       as="span"

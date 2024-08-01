@@ -28,6 +28,10 @@ app.use('/api/auth', require('./authRoutes'));
 // Add this line to include the new appointments routes
 app.use('/api/appointments', require('./routes/appointments'));
 
+// for test upload data
+app.use('/api/tests', require('./routes/tests'));
+app.use('/api/upload', require('./routes/upload'));
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
