@@ -57,11 +57,26 @@ function Home() {
 export default Home;
 */ // old home page code
 
-import React, { useEffect } from 'react';
+//---------------------------------
+
+//version 1 UI not needed
+
+/* import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
+  const goToRegister = () => {
+    navigate("/register");
+  };
+
   useEffect(() => {
-    // Sscrool
+    // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -71,7 +86,7 @@ const Home = () => {
       });
     });
 
-    // submit
+    // Form submission handling
     const form = document.querySelector('form');
     if (form) {
       form.addEventListener('submit', function(e) {
@@ -81,15 +96,7 @@ const Home = () => {
       });
     }
 
-    //logss
-    const loginBtn = document.querySelector('.login-btn');
-    if (loginBtn) {
-      loginBtn.addEventListener('click', function() {
-        alert('Login functionality coming soon!');
-      });
-    }
-
-    
+    // Simple animation for section headers
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -144,7 +151,11 @@ const Home = () => {
             color: #333;
             font-weight: bold;
           }
-          .login-btn {
+          .auth-buttons {
+            display: flex;
+            gap: 1rem;
+          }
+          .auth-button {
             background-color: #b00b84;
             color: #fff;
             border: none;
@@ -237,7 +248,7 @@ const Home = () => {
               margin-left: 0;
               margin-right: 1rem;
             }
-            .login-btn {
+            .auth-buttons {
               margin-top: 1rem;
             }
             .footer-content {
@@ -265,7 +276,10 @@ const Home = () => {
               <li><a href="#about">About Us</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
-            <button className="login-btn">Login</button>
+            <div className="auth-buttons">
+              <button className="auth-button" onClick={goToLogin}>Login</button>
+              <button className="auth-button" onClick={goToRegister}>Register</button>
+            </div>
           </nav>
         </header>
 
@@ -320,6 +334,193 @@ const Home = () => {
             </div>
           </div>
         </footer>
+      </div>
+    </>
+  );
+};
+
+export default Home; */
+
+
+// Version 2 UI
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Home = () => {
+  const navigate = useNavigate();
+
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
+  const goToRegister = () => {
+    navigate("/register");
+  };
+
+  return (
+    <>
+      <style>
+        {`
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f0f0;
+          }
+          header {
+            background-color: #fff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+          }
+          nav ul {
+            display: flex;
+            list-style: none;
+          }
+          nav ul li {
+            margin-left: 2rem;
+          }
+          nav ul li a {
+            text-decoration: none;
+            color: #333;
+          }
+          .auth-buttons button {
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          .login-btn {
+            background-color: transparent;
+            color: #333;
+            border: 1px solid #333;
+          }
+          .register-btn {
+            background-color: #00b4d8;
+            color: #fff;
+          }
+          .hero {
+            background-color: #fff;
+            padding: 4rem 5%;
+            display: flex;
+            align-items: center;
+            border-radius: 20px;
+            margin: 2rem 5%;
+          }
+          .hero-content {
+            flex: 1;
+          }
+          .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #000;
+          }
+          .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00b4d8;
+          }
+          .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+          }
+          .community {
+            background-color: #f0f0f0;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+          }
+          .community h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #000;
+          }
+          .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+          }
+          .button {
+            background-color: #00b4d8;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+          }
+          .hero-image {
+            flex: 1;
+            height: 400px;
+            background-color: #00b4d8;
+            border-radius: 20px;
+          }
+        `}
+      </style>
+      <div>
+        <header>
+          <div className="logo">MedEdge</div>
+          <nav>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+          <div className="auth-buttons">
+            <button className="login-btn" onClick={goToLogin}>Login</button>
+            <button className="register-btn" onClick={goToRegister}>Register</button>
+          </div>
+        </header>
+
+        <main>
+          <section className="hero">
+            <div className="hero-content">
+              <h1>MedEdge</h1>
+              <h2>Bridging the Gap in Medical and Technological Collaboration</h2>
+              <p>
+                MedEdge is an innovative initiative designed to bridge the
+                significant gap between Medical Colleges, Hospitals, and
+                Technological Universities in India. This project aims to foster
+                collaboration and advance research by integrating the latest
+                technological advancements into the medical field.
+              </p>
+              <div className="community">
+                <h3>Join Our Community</h3>
+                <p>
+                  Discover the unique opportunities at MedEdge, where excellence in
+                  education meets exceptional healthcare. Whether you are a future
+                  medical professional or seeking top-notch healthcare services, we
+                  invite you to be part of our vibrant community dedicated to making
+                  a difference.
+                </p>
+              </div>
+              <div className="buttons">
+                <button className="button" onClick={goToLogin}>
+                  Login
+                </button>
+                <button className="button" onClick={goToRegister}>
+                  Register
+                </button>
+              </div>
+            </div>
+            <div className="hero-image"></div>
+          </section>
+        </main>
       </div>
     </>
   );
