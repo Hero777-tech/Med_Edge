@@ -346,6 +346,8 @@ export default Home; */
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from "./Home.module.css";
+import heroImage from '../../assets/pic.png';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -379,6 +381,7 @@ const Home = () => {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
           }
           .logo {
             font-size: 1.5rem;
@@ -412,63 +415,170 @@ const Home = () => {
             background-color: #00b4d8;
             color: #fff;
           }
+          
+          
           .hero {
-            background-color: #fff;
-            padding: 4rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 5%;
+    background-color: #fff;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #666;
+  }
+
+  .cta-button {
+    background-color: #00b4d8;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image img {
+    max-width: 65%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+    }
+    .hero-content, .hero-image {
+      max-width: 100%;
+    }
+  }
+
+
+
+          .services {
             display: flex;
-            align-items: center;
-            border-radius: 20px;
-            margin: 2rem 5%;
+            justify-content: space-between;
+            padding: 2rem 5%;
+            background-color: #00b4d8;
           }
-          .hero-content {
+          .service-item {
             flex: 1;
+            text-align: center;
+            color: #fff;
+            padding: 1rem;
           }
-          .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #000;
-          }
-          .hero h2 {
+          .service-icon {
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: #00b4d8;
           }
-          .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #666;
-          }
-          .community {
-            background-color: #f0f0f0;
-            padding: 2rem;
-            border-radius: 20px;
-            margin-top: 2rem;
-          }
-          .community h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #000;
-          }
-          .buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-          }
-          .button {
-            background-color: #00b4d8;
-            color: #fff;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-          }
-          .hero-image {
-            flex: 1;
-            height: 400px;
-            background-color: #00b4d8;
-            border-radius: 20px;
-          }
+
+
+          
+
+        .about-us {
+      padding: 4rem 5%;
+      background-color: #ffffff;
+    }
+
+    .about-us-content {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-us-text {
+      flex: 1;
+    }
+
+    .about-us h2 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .about-us p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .know-more-btn {
+      background-color: #00b4d8;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .know-more-btn:hover {
+      background-color: #0096b1;
+    }
+
+    .about-us-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .about-us-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .about-us-content {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .about-us-text,
+      .about-us-image {
+        width: 100%;
+      }
+    }
+
+        
+
+
+
+
+
+
+
+
+
+
         `}
       </style>
       <div>
@@ -477,7 +587,8 @@ const Home = () => {
           <nav>
             <ul>
               <li><a href="#home">Home</a></li>
-              <li><a href="#about">About Us</a></li>
+              <li><a href="#about_page">About Us</a></li>
+              <li><a href="#services">Services</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </nav>
@@ -490,36 +601,64 @@ const Home = () => {
         <main>
           <section className="hero">
             <div className="hero-content">
-              <h1>MedEdge</h1>
-              <h2>Bridging the Gap in Medical and Technological Collaboration</h2>
+              <h1>We have Best Medicare plan options for you</h1>
               <p>
                 MedEdge is an innovative initiative designed to bridge the
                 significant gap between Medical Colleges, Hospitals, and
-                Technological Universities in India. This project aims to foster
-                collaboration and advance research by integrating the latest
-                technological advancements into the medical field.
+                Technological Universities in India.
               </p>
-              <div className="community">
-                <h3>Join Our Community</h3>
-                <p>
-                  Discover the unique opportunities at MedEdge, where excellence in
-                  education meets exceptional healthcare. Whether you are a future
-                  medical professional or seeking top-notch healthcare services, we
-                  invite you to be part of our vibrant community dedicated to making
-                  a difference.
-                </p>
+              <button className="cta-button">Learn More</button>
+            </div>
+            <div className="hero-image">
+              {/* Add your hero image here */}
+              <img src={heroImage} alt="Hero" />
+            </div>
+          </section>
+
+          <section className="services">
+            <div className="service-item">
+              <div className="service-icon">🏥</div>
+              <h3>Best Treatment</h3>
+              <p>Quality care for all patients</p>
+            </div>
+            <div className="service-item">
+              <div className="service-icon">🚑</div>
+              <h3>Emergency Help</h3>
+              <p>24/7 emergency services</p>
+            </div>
+            <div className="service-item">
+              <div className="service-icon">👨‍⚕️</div>
+              <h3>Medical Staff</h3>
+              <p>Experienced healthcare professionals</p>
+            </div>
+            <div className="service-item">
+              <div className="service-icon">🩺</div>
+              <h3>Qualified Doctors</h3>
+              <p>Specialists in various fields</p>
+            </div>
+          </section>
+
+
+
+          <section className="about-us" id='about_page'>
+            <div className="about-us-content">
+              <div className="about-us-text">
+                <h2>About Us</h2>
+                <p>MedEdge is committed to bridging the gap between medical education and cutting-edge technology, fostering innovation in healthcare.</p>
+                <button className="know-more-btn">Know More</button>
               </div>
-              <div className="buttons">
-                <button className="button" onClick={goToLogin}>
-                  Login
-                </button>
-                <button className="button" onClick={goToRegister}>
-                  Register
-                </button>
+              <div className="about-us-image">
+                <img src="path_to_your_image.jpg" alt="MedEdge Professional" />
               </div>
             </div>
-            <div className="hero-image"></div>
           </section>
+
+
+
+
+
+
+
         </main>
       </div>
     </>
