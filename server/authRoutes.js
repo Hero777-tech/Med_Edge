@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('./userModel');
+const {Users} = require('./userModel');
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     console.log('Login attempt for email:', email);
 
-    const user = await User.findOne({ email });
+    const user = await Users.findOne({ email });
     if (!user) {
       console.log('User not found:', email);
       return res.status(400).json({ message: 'Invalid credentials' });
@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
       return res.status(500).json({ message: 'Internal server error' });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1h' });
     console.log('Login successful for user:', email);
     res.json({ 
       token, 
@@ -58,7 +58,7 @@ router.post('/register', async (req, res) => {
     console.log('Registration attempt for email:', email);
 
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await Users.findOne({ email });
     if (existingUser) {
       console.log('User already exists:', email);
       return res.status(400).json({ message: 'User already exists' });
@@ -80,9 +80,9 @@ router.post('/register', async (req, res) => {
     });
 
     await newUser.save();
-
+    const token = jwt.sign({ newUser }, process.env.JWT_SECRET, { expiresIn: '1h' });
     console.log('User registered successfully:', email);
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'User registered successfully',token:token });
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Error registering user', error: error.message });

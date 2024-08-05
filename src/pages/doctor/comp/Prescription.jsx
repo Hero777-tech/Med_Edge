@@ -1,165 +1,188 @@
 import styles from "./Prescription.module.css";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MiddleContent from "./Prescriptionview";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 function Prescription() {
-  const data = [
-    {
-      name: "John Doe",
-      medication: "Paracetamol",
-      dosage: "500mg",
-      frequency: "Twice a day",
-      duration: "7 days",
-      startDate: "2024-06-21",
-      endDate: "2024-06-28",
-      notes: "Take with food",
-    },
-    {
-      name: "Jane Smith",
-      medication: "Amoxicillin",
-      dosage: "500mg",
-      frequency: "Three times a day",
-      duration: "10 days",
-      startDate: "2024-07-02",
-      endDate: "2024-07-11",
-      notes: "Take with food, avoid alcohol",
-    },
-    {
-      name: "David Lee",
-      medication: "Metformin",
-      dosage: "500mg",
-      frequency: "Twice a day",
-      duration: "Ongoing", // Change to a specific duration if known
-      startDate: "2024-05-15",
-      endDate: null, // Ongoing medication has no end date
-      notes: "Monitor blood sugar levels",
-    },
-    {
-      name: "Olivia Rodriguez",
-      medication: "Albuterol",
-      dosage: "2 puffs",
-      frequency: "As needed",
-      duration: "N/A", // Not applicable for inhalers
-      startDate: "2024-06-10",
-      endDate: null,
-      notes: "For shortness of breath",
-    },
-    {
-      name: "William Brown",
-      medication: "Prednisolone",
-      dosage: "10mg",
-      frequency: "Once a day",
-      duration: "5 days",
-      startDate: "2024-06-25",
-      endDate: "2024-06-30",
-      notes: "Taper dosage after 3 days",
-    },
-    {
-      name: "Emily Garcia",
-      medication: "Ibuprofen",
-      dosage: "200mg",
-      frequency: "Up to 3 times a day",
-      duration: "As needed",
-      startDate: "2024-07-01",
-      endDate: null,
-      notes: "For pain relief",
-    },
-  ];
-  const searchText = useRef("");
-  const [filteredData, setFilteredData] = useState(data);
+  const [patients, setPatients] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [prescriptions, setPrescriptions] = useState([]);
 
-  const setDisplayData = (event) => {
-    const filtered = data.filter((item) => {
-      const lowerId = item.name.toString().toLowerCase();
-      return lowerId.includes(event.target.value.toLowerCase());
-    });
-    setFilteredData(filtered);
+  const [patientName, setPatientName] = useState("");
+  const [medication, setMedication] = useState("");
+  const [dosage, setDosage] = useState("");
+  const [frequency, setFrequency] = useState("");
+  const [duration, setDuration] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [notes, setNotes] = useState("");
+  const [patientId, setPatientId] = useState("");
+
+  useEffect(() => {
+    async function getList() {
+      try {
+        const res1 = await fetch("http://localhost:5000/api/getUsers");
+        const res2 = await fetch("http://localhost:5000/api/pres");
+        const result1 = await res1.json();
+        const result2 = await res2.json();
+        console.log(result1);
+        setPatients(result1.filter((p) => p.facilitySubType === "Patient"));
+        setPrescriptions(result2);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getList(); // Invoke the getList function here
+  }, []);
+
+  const renderRight = (patient) => {
+    setSelectedPatient(prescriptions.filter((p) => p.patientId === patient.uid));
+    console.log(selectedPatient);
+    setPatientName(patient.username); // Assuming username is the patient name
+    setPatientId(patient.uid); // Assuming uid is the patient ID
   };
-  const [selectedPatient, setSelectedpatient] = useState();
-  const renderRight = (item) => {
-    setSelectedpatient(item);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const prescriptionData = {
+      patientId,
+      medication,
+      dosage,
+      frequency,
+      duration,
+      startDate,
+      endDate,
+      notes,
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/api/prescription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(prescriptionData),
+      });
+
+      const result = await res.json();
+      console.log(result);
+      if (res.ok) {
+        alert("Prescription created successfully!");
+        // Fetch the updated list of prescriptions
+        const updatedRes = await fetch("http://localhost:5000/api/pres");
+        const updatedPrescriptions = await updatedRes.json();
+        setPrescriptions(updatedPrescriptions);
+        setSelectedPatient(updatedPrescriptions.filter((p) => p.patientId === patientId));
+      } else {
+        alert("Failed to create prescription.");
+      }
+    } catch (error) {
+      console.error("Error creating prescription:", error);
+      alert("Error creating prescription.");
+    }
   };
 
   return (
     <div className={styles.contain}>
-      <div className={styles.givenPrescription}>
-        <div className={styles.leftBox}>
-          <h4>Patient List</h4>
-          <hr />
-          <div className={styles.set}>
-            <input
-              type="text"
-              placeholder="Search patients"
-              ref={searchText}
-              onChange={setDisplayData}
-            />
-          </div>
-          <div className="patientList">
-            {filteredData.map((item) => (
-              <>
-                <p
-                  className={styles.patientList}
-                  onClick={() => renderRight(item)}
-                  key={item.name}
-                >
-                  {item.name}-{item.medication}-{item.dosage}-{item.notes}-
-                  {item.duration}
-                </p>
-                <hr />
-              </>
-            ))}
-          </div>
+      <div className={styles.leftBox}>
+        <h4>Patient List</h4>
+        <hr />
+        <div className={styles.set}>
+          <input type="text" placeholder="Search patients" />
         </div>
-        <div className={styles.middleBox}>
-          <h3>Patient's Prescription</h3>
-          <hr />
-          <MiddleContent item={selectedPatient} />
+        <div className="patientList">
+          {patients.map((item) => (
+            <React.Fragment key={item._id}>
+              <p className={styles.patientList} onClick={() => renderRight(item)}>
+                {item.username} - Age: {item.age} - Last Visit: {item.lastVisit}
+              </p>
+              <hr />
+            </React.Fragment>
+          ))}
         </div>
       </div>
-
+      <div className={styles.rightBox}>
+        <h3>Patient Details</h3>
+        <hr />
+        {selectedPatient && <MiddleContent item={selectedPatient} />}
+      </div>
       <div className={styles.rightBox}>
         <h3>Create New Prescription</h3>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-1">
             <Form.Label>Patient Name</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              readOnly
+            />
           </Form.Group>
           <Form.Group className="mb-1">
             <Form.Label>Medication</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              value={medication}
+              onChange={(e) => setMedication(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-1">
-            <Form.Label>Doasge</Form.Label>
-            <Form.Control type="text" />
+            <Form.Label>Dosage</Form.Label>
+            <Form.Control
+              type="text"
+              value={dosage}
+              onChange={(e) => setDosage(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-1">
             <Form.Label>Frequency</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              value={frequency}
+              onChange={(e) => setFrequency(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-1">
             <Form.Label>Duration</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-1">
             <Form.Label>Start Date</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-1">
             <Form.Label>End Date</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
           </Form.Group>
-          <Form.Group className="mb-1" controlId="formGroupPassword">
+          <Form.Group className="mb-1">
             <Form.Label>Notes</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
           </Form.Group>
-          <button type="button" class="btn btn-primary">
-            Primary
-          </button>
+          <Button type="submit" className="btn btn-primary">
+            Submit
+          </Button>
         </Form>
       </div>
     </div>
   );
 }
+
 export default Prescription;

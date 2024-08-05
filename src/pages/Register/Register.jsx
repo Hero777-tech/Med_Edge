@@ -47,8 +47,9 @@ export default function Register() {
         dateOfBirth: formData.dateOfBirth,
         facilityType: formData.facilityType,
         facilitySubType: formData.facilitySubType,
+        id: Math.floor(Math.random()*10000)
       });
-
+      localStorage.setItem("token", response.data.token);
       console.log(response.data);
       // Redirect to login page after successful registration
       navigate("/login");

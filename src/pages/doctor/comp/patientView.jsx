@@ -5,7 +5,7 @@ function RightContent({ item }) {
       {item ? ( // Check if item exists
         <>
           <b>Name:</b>
-          {item.name}
+          {item.username}
           <br />
 
           <b>Age:</b>
@@ -16,7 +16,7 @@ function RightContent({ item }) {
           {item.gender}
           <br />
           <b>Contact:</b>
-          {item.contact}
+          {item.phoneNumber}
           <br />
           <b>Last Visit:</b>
           {item.lastVisit}

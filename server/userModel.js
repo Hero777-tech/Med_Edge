@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: true },
   dateOfBirth: { type: Date, required: true },
   facilityType: { type: String, required: true },
-  facilitySubType: { type: String, required: true }
+  facilitySubType: { type: String, required: true },
+  uid: {type: Number}
 });
-
-module.exports = mongoose.model('User', userSchema);
+const Users= mongoose.model('User', userSchema);
+module.exports = {Users}

@@ -28,14 +28,7 @@ function DoctorPage() {
         return <Patient />;
       case "prescription":
         return <Prescription />;
-      case "resources":
-        return <ResourcesForm />;
-      case "taskManagement":
-        return <TaskForm />;
-      case "messages":
-        return <Message />;
-      case "collaboration":
-        return <Collaboration />;
+      
       default:
         return null;
     }
@@ -104,58 +97,7 @@ function DoctorPage() {
             />{" "}
             Prescription
           </div>
-          <div
-            className={`${selectedItem === "resources" && "active"} ${
-              styles.list
-            }`}
-            onClick={() => handleItemClick("resources")}
-          >
-            <img
-              className={styles.iconImg}
-              src="src/assets/WhatsApp Image 2024-06-24 at 16.03.08.jpeg"
-              alt="amt"
-            />{" "}
-            Resources
-          </div>
-          <div
-            className={`${selectedItem === "taskManagement" && "active"} ${
-              styles.list
-            }`}
-            onClick={() => handleItemClick("taskManagement")}
-          >
-            <img
-              className={styles.iconImg}
-              src="src/assets/WhatsApp Image 2024-06-24 at 16.03.08.jpeg"
-              alt="amt"
-            />{" "}
-            Task Management
-          </div>
-          <div
-            className={`${selectedItem === "messages" && "active"} ${
-              styles.list
-            }`}
-            onClick={() => handleItemClick("messages")}
-          >
-            <img
-              className={styles.iconImg}
-              src="src/assets/WhatsApp Image 2024-06-24 at 16.03.08.jpeg"
-              alt="amt"
-            />{" "}
-            Messages
-          </div>
-          <div
-            className={`${selectedItem === "collaboration" && "active"} ${
-              styles.list
-            }`}
-            onClick={() => handleItemClick("collaboration")}
-          >
-            <img
-              className={styles.iconImg}
-              src="src/assets/WhatsApp Image 2024-06-24 at 16.03.08.jpeg"
-              alt="amt"
-            />{" "}
-            Collaboration
-          </div>
+          
           <div className={styles.list} onClick={() => navigate("/")}>
             <img
               className={styles.iconImg}

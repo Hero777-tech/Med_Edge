@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const getusr= require("./controler/getuser")
+const prescription= require("./routes/addprescription");
+const getpres= require("./controler/getprescription")
 
 dotenv.config();
 
@@ -31,7 +34,9 @@ app.use('/api/appointments', require('./routes/appointments'));
 // for test upload data
 app.use('/api/tests', require('./routes/tests'));
 app.use('/api/upload', require('./routes/upload'));
-
+app.use('/', getusr)
+app.use('/', prescription)
+app.use('/', getpres)
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
