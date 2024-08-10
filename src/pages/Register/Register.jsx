@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Register.module.css";
 
-const API_URL = 'https://med-edge-pi.vercel.app' || 'http://localhost:5000';
+const API_URL = 'http://localhost:5000';
 
 export default function Register() {
   const navigate = useNavigate();
