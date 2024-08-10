@@ -21,6 +21,7 @@ export default function Register() {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const [facilityOptions, setFacilityOptions] = useState([]);
 
   const goToLogin = () => {
     navigate("/login");
@@ -28,6 +29,19 @@ export default function Register() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFacilityTypeChange = (e) => {
+    const selectedType = e.target.value;
+    setFormData({ ...formData, facilityType: selectedType, facilitySubType: "" });
+
+    if (selectedType === "hospital") {
+      setFacilityOptions(["Doctor", "Patient", "Pathologist", "Researcher"]);
+    } else if (selectedType === "college") {
+      setFacilityOptions(["Professor", "Student", "Researcher"]);
+    } else {
+      setFacilityOptions([]);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -52,7 +66,6 @@ export default function Register() {
       });
 
       console.log(response.data);
-      // Redirect to login page after successful registration
       navigate("/login");
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred during registration");
@@ -60,47 +73,6 @@ export default function Register() {
   };
 
   useEffect(() => {
-    const selector1 = document.getElementById("selector1");
-    const selector2 = document.getElementById("selector2");
-
-    selector1.addEventListener("change", function () {
-      const selectedType = this.value;
-      setFormData({ ...formData, facilityType: selectedType, facilitySubType: "" });
-
-      selector2.innerHTML = "";
-
-      if (selectedType === "hospital") {
-        const hospital = ["Doctor", "Patient", "Pathologist", "Researcher"];
-        let defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.text = "Select a Hospital Facility Type";
-        defaultOption.selected = true;
-        defaultOption.disabled = true;
-        selector2.add(defaultOption);
-
-        hospital.forEach((hospital) => {
-          const option = document.createElement("option");
-          option.value = hospital;
-          option.text = hospital;
-          selector2.add(option);
-        });
-      } else if (selectedType === "college") {
-        const college = ["Professor", "Student", "Researcher"];
-        let defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.text = "Select a College Facility Type";
-        defaultOption.selected = true;
-        defaultOption.disabled = true;
-        selector2.add(defaultOption);
-        college.forEach((college) => {
-          const option = document.createElement("option");
-          option.value = college;
-          option.text = college;
-          selector2.add(option);
-        });
-      }
-    });
-
     const countryCodeSelect = document.getElementById("countryCode");
 
     fetch("https://restcountries.com/v3.1/all")
@@ -212,7 +184,7 @@ export default function Register() {
                 id="selector1"
                 name="facilityType"
                 value={formData.facilityType}
-                onChange={handleChange}
+                onChange={handleFacilityTypeChange}
                 required
               >
                 <option value="" disabled>Facility Type</option>
@@ -227,7 +199,10 @@ export default function Register() {
                 onChange={handleChange}
                 required
               >
-                <option value="" disabled>Please Select a Facility Type</option>
+                <option value="" disabled>Select a Facility Sub-Type</option>
+                {facilityOptions.map((option, index) => (
+                  <option key={index} value={option}>{option}</option>
+                ))}
               </select>
             </div>
 
