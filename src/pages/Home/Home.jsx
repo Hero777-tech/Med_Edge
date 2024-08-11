@@ -795,7 +795,7 @@ const Home = () => {
             <h2>Contact Us</h2>
             <p>Get in touch with us through our social media channels or send us a message directly.</p>
             <div className="social-buttons">
-              <a href="https://wa.me/+919999999999" target="_blank" rel="noopener noreferrer" className="social-button whatsapp">
+              <a href="https://wa.me/+9199992932" target="_blank" rel="noopener noreferrer" className="social-button whatsapp">
                 <FaWhatsapp />
               </a>
               <a href="https://github.com/Hero777-tech/Med_Edge" target="_blank" rel="noopener noreferrer" className="social-button github">
