@@ -13,9 +13,9 @@ const app = express();
 
 // CORS Configuration
 app.use(cors({
-  origin: 'med-edge-pi.vercel.app', // Allow requests only from this origin
-  credentials: true, // Allow credentials such as cookies or authorization headers
-  optionsSuccessStatus: 200 // For legacy browser support
+  origin: '*', // Allow requests from both production and development
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
 
 // Middleware
@@ -23,7 +23,7 @@ app.use(express.json());
 
 // Logging middleware
 app.use((req, res, next) => {
-  console.log(${new Date().toISOString()} - ${req.method} request to ${req.url});
+  console.log(`${new Date().toISOString()} - ${req.method} request to ${req.url}`);
   next();
 });
 
@@ -43,17 +43,17 @@ app.use('/api/upload', require('./routes/upload'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(Server running on port ${PORT});
+  console.log(`Server running on port ${PORT}`);
 });
 
 // Catch-all for unmatched routes
 app.use((req, res) => {
-  console.log(404: ${req.method} request for ${req.url});
+  console.log(`404: ${req.method} request for ${req.url}`);
   res.status(404).send('Not found');
 });
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error(${new Date().toISOString()} - Error:, err);
+  console.error(`${new Date().toISOString()} - Error:`, err);
   res.status(500).json({ message: 'Internal server error', error: err.message });
 });
