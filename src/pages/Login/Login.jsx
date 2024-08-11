@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://med-edge-backend.vercel.app';
 
 export default function Login() {
   const navigate = useNavigate();
