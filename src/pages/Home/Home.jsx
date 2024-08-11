@@ -346,8 +346,10 @@ export default Home; */
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaHeartbeat, FaStethoscope, FaUserMd, FaHospital, FaWhatsapp, FaGithub, FaLinkedin } from 'react-icons/fa';
 import styles from "./Home.module.css";
 import heroImage from '../../assets/pic.png';
+import himage from './docabout.jpg'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -465,6 +467,11 @@ const Home = () => {
     height: auto;
     border-radius: 10px;
   }
+  .about-us-image{
+  max-width: 30%;
+  height: auto;
+  border-radius: 10px;
+  }
 
   @media (max-width: 768px) {
     .hero {
@@ -568,6 +575,105 @@ const Home = () => {
       }
     }
 
+
+
+    /* Services section */
+          .services-section {
+            padding: 4rem 5%;
+            background-color: #f8f9fa;
+          }
+          .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+          }
+          .service-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+          }
+          .service-card:hover {
+            transform: translateY(-5px);
+          }
+          .service-icon {
+            font-size: 3rem;
+            color: #00b4d8;
+            margin-bottom: 1rem;
+          }
+          .service-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+          }
+          .service-card p {
+            color: #666;
+          }
+          .all-services-btn {
+            display: block;
+            width: max-content;
+            margin: 2rem auto 0;
+            padding: 0.75rem 1.5rem;
+            background-color: #00b4d8;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          .all-services-btn:hover {
+            background-color: #0096b1;
+          }
+
+
+
+          /* the Contact Us section */
+          .contact-us {
+            padding: 4rem 5%;
+            background-color: #f8f9fa;
+            text-align: center;
+          }
+          .contact-us h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+          }
+          .contact-us p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+          }
+          .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+          }
+          .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: #fff;
+            transition: transform 0.3s ease;
+          }
+          .social-button:hover {
+            transform: scale(1.1);
+          }
+          .whatsapp {
+            background-color: #25D366;
+          }
+          .github {
+            background-color: #333;
+          }
+          .linkedin {
+            background-color: #0077B5;
+          }
         
 
 
@@ -648,10 +754,60 @@ const Home = () => {
                 <button className="know-more-btn">Know More</button>
               </div>
               <div className="about-us-image">
-                <img src="path_to_your_image.jpg" alt="MedEdge Professional" />
+                <img src={himage} alt="MedEdge Professional" />
               </div>
             </div>
           </section>
+
+
+
+          <section className="services-section" id="services">
+            <h2>Our Services</h2>
+            <p>We offer a wide range of medical services to cater to all your healthcare needs.</p>
+            <div className="services-grid">
+              <div className="service-card">
+                <FaHeartbeat className="service-icon" />
+                <h3>Cardiology</h3>
+                <p>Comprehensive heart care and treatments.</p>
+              </div>
+              <div className="service-card">
+                <FaStethoscope className="service-icon" />
+                <h3>General Health</h3>
+                <p>Regular check-ups and preventive care.</p>
+              </div>
+              <div className="service-card">
+                <FaUserMd className="service-icon" />
+                <h3>Specialized Consultations</h3>
+                <p>Expert advice from various specialists.</p>
+              </div>
+              <div className="service-card">
+                <FaHospital className="service-icon" />
+                <h3>Emergency Care</h3>
+                <p>24/7 emergency medical services.</p>
+              </div>
+            </div>
+            <button className="all-services-btn">View All Services</button>
+          </section>
+
+
+
+          <section className="contact-us" id="contact">
+            <h2>Contact Us</h2>
+            <p>Get in touch with us through our social media channels or send us a message directly.</p>
+            <div className="social-buttons">
+              <a href="https://wa.me/+919999999999" target="_blank" rel="noopener noreferrer" className="social-button whatsapp">
+                <FaWhatsapp />
+              </a>
+              <a href="https://github.com/Hero777-tech/Med_Edge" target="_blank" rel="noopener noreferrer" className="social-button github">
+                <FaGithub />
+              </a>
+              <a href="https://www.linkedin.com/school/national-institute-of-technology-silchar/" target="_blank" rel="noopener noreferrer" className="social-button linkedin">
+                <FaLinkedin />
+              </a>
+            </div>
+          </section>
+
+
 
 
 
