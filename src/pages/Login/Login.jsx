@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 
-const API_URL = 'https://med-edge-backend.vercel.app';
+const API_URL = 'https://med-edge-backend.vercel.app' || 'http://localhost:5000';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,10 +19,13 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
+      console.log(`Attempting to login with API URL: ${API_URL}`);
       const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
+      
+      console.log('Login response:', response.data);
       
       // Store the token in localStorage
       localStorage.setItem("token", response.data.token);
@@ -31,6 +34,7 @@ export default function Login() {
       const userType = response.data.userType;
       
       if (userType) {
+        console.log(`User type received: ${userType}`);
         // Navigate based on user type
         switch(userType.toLowerCase()) {
           case 'doctor':
@@ -49,17 +53,16 @@ export default function Login() {
             navigate("/professor");
             break;
           default:
-            // If no matching route, navigate to a default page
+            console.log(`Unknown user type: ${userType}. Navigating to default page.`);
             navigate("/");
             break;
         }
       } else {
-        // If userType is not provided, navigate to a default page
         console.log("User type not provided in the response. Navigating to default page.");
         navigate("/");
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login error:", error.response || error);
       setError(error.response?.data?.message || "An error occurred during login");
     }
   };
