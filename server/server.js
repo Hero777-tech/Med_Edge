@@ -13,7 +13,7 @@ const app = express();
 
 // CORS Configuration
 app.use(cors({
-  origin: 'med-edge-backend.vercel.app', // Allow requests only from this origin
+  origin: 'med-edge-pi.vercel.app', // Allow requests only from this origin
   credentials: true, // Allow credentials such as cookies or authorization headers
   optionsSuccessStatus: 200 // For legacy browser support
 }));
