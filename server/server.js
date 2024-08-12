@@ -13,7 +13,7 @@ const app = express();
 
 // CORS Configuration
 app.use(cors({
-  origin: '*', // Allow requests from both production and development
+  origin: '*', // Allow all
   credentials: true,
   optionsSuccessStatus: 200
 }));

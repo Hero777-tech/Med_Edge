@@ -346,7 +346,7 @@ export default Home; */
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaHeartbeat, FaStethoscope, FaUserMd, FaHospital, FaWhatsapp, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaHeartbeat, FaStethoscope, FaUserMd, FaHospital, FaWhatsapp, FaGithub, FaLinkedin, FaGlobe } from 'react-icons/fa';
 import styles from "./Home.module.css";
 import heroImage from '../../assets/pic.png';
 import himage from './docabout.jpg'
@@ -676,11 +676,29 @@ const Home = () => {
           }
         
 
+          .website {
+            background-color: #2c3e50;
+          }
 
 
-
-
-
+          /*Footer Section*/
+          .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+          }
+          .footer p {
+            margin: 0.5rem 0;
+          }
+          .footer a {
+            color: #00b4d8;
+            text-decoration: none;
+          }
+          .footer a:hover {
+            text-decoration: underline;
+          }
 
 
 
@@ -795,6 +813,13 @@ const Home = () => {
             <h2>Contact Us</h2>
             <p>Get in touch with us through our social media channels or send us a message directly.</p>
             <div className="social-buttons">
+              
+              <a href="https://cdnmededge.b-cdn.net/" target="_blank" rel="noopener noreferrer" className="social-button website">
+                <FaGlobe /> CDN
+              </a>
+              
+
+
               <a href="https://wa.me/+9199992932" target="_blank" rel="noopener noreferrer" className="social-button whatsapp">
                 <FaWhatsapp />
               </a>
@@ -804,6 +829,15 @@ const Home = () => {
               <a href="https://www.linkedin.com/school/national-institute-of-technology-silchar/" target="_blank" rel="noopener noreferrer" className="social-button linkedin">
                 <FaLinkedin />
               </a>
+              
+              <a href="https://www.yourwebsite.com" target="_blank" rel="noopener noreferrer" className="social-button website">
+              <FaGlobe />
+              VMS
+                
+              </a>
+
+
+              
             </div>
           </section>
 
@@ -816,6 +850,14 @@ const Home = () => {
 
 
         </main>
+
+        <footer className="footer">
+          <p>&copy; {new Date().getFullYear()} NIT Silchar. All rights reserved.</p>
+          <p>Developed under the guidance of <a href="http://cs.nits.ac.in/rp/" target="_blank" rel="noopener noreferrer">Dr. Ripon Patgiri</a></p>
+        </footer>
+
+
+
       </div>
     </>
   );
